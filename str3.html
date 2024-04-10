@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #FFF;
+            margin: 20px;
+            padding: 20px;
+            text-align: center;
+
+        h1, h2 {
+            color: #007BFF;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+        ul, ol {
+            margin-bottom: 15px;
+        }
+        code {
+            background-color: #333;
+            color: #FFF;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+        }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+        <h1>Тест по HTML и CSS</h1>
+        <div id="quiz"></div>
+        <button onclick="checkAnswers()">Проверить ответы</button>
+    
+  
+        <script>
+            const questions = [
+                {
+                    questionText: "Тег для определения гиперссылки на веб-странице?",
+                    options: ["a href", "link", "href"],
+                    correctOption: "0"
+                },
+                {
+                    questionText: "Тег, который создаёт ячейку-заголовок таблицы?",
+                    options: ["a", "th", "td"],
+                    correctOption: "1"
+                },
+                {
+                    questionText: "Атрибут, который задает ширину?",
+                    options: ["width", "size", "length"],
+                    correctOption: "0"
+                },
+                {
+                    questionText: "Тег, который создаёт кнопку?",
+                    options: ["button", "input", "a"],
+                    correctOption: "0"
+                },
+                {
+                    questionText: "Тег, который создаёт контейнер?",
+                    options: ["div", "container", "block"],
+                    correctOption: "0"
+                },
+                {
+                    questionText: "Тег, использующийся для навигации по сайту?",
+                    options: ["nav", "navigate", "a"],
+                    correctOption: "0"
+                },
+                {
+                    questionText: "Тег для создания самого маленького заголовка?",
+                    options: ["h1", "h6", "smallest"],
+                    correctOption: "2"
+                },
+                {
+                    questionText: "Тег для создания самого большого заголовка?",
+                    options: ["h1", "h6", "biggest"],
+                    correctOption: "0"
+                },
+                {
+                    questionText: "Тег для начала и конца веб-страницы?",
+                    options: ["html", "head", "body"],
+                    correctOption: "0"
+                },
+                {
+                    questionText: "Тег строки (ряда) таблицы?",
+                    options: ["tr", "td", "th"],
+                    correctOption: "0"
+                },
+                {
+                    questionText: "Тег обычной ячейки таблицы?",
+                    options: ["td", "tr", "th"],
+                    correctOption: "0"
+                },
+                // Add more questions as needed
+            ];
+    
+            let currentQuestionIndex = 0;
+            let userAnswers = [];
+    
+            function displayQuestion() {
+                const quizContainer = document.getElementById("quiz");
+                const currentQuestion = questions[currentQuestionIndex];
+    
+                quizContainer.innerHTML = `
+                    <div class="question">${currentQuestion.questionText}</div>
+                    <div>
+                        ${currentQuestion.options.map((option, index) => `
+                            <input type="radio" name="answer" value="${index}" id="option${index}">
+                            <label for="option${index}">${option}</label>
+                        `).join('')}
+                    </div>
+                `;
+            }
+    
+            function checkAnswers() {
+                const selectedOption = document.querySelector('input[name="answer"]:checked');
+    
+                if (!selectedOption) {
+                    alert("Пожалуйста, выберите ответ перед проверкой.");
+                    return;
+                }
+    
+                userAnswers.push(selectedOption.value);
+                currentQuestionIndex++;
+    
+                if (currentQuestionIndex < questions.length) {
+                    displayQuestion();
+                } else {
+                    displayResult();
+                }
+            }
+    
+            function displayResult() {
+                const correctAnswers = questions.filter((question, index) => question.correctOption === userAnswers[index]);
+    
+                alert(`Результат теста: ${correctAnswers.length} из ${questions.length} правильных ответов.`);
+            }
+    
+            // Initial display
+            displayQuestion();
+        </script>
+    </div>
+        </ul>
+    </div>
+  </body>
+</html>
